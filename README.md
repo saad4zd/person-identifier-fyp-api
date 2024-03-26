@@ -1,6 +1,6 @@
-# Gait and Action Recognition API
+# Person Identifier API
 
-This repository contains the code for an API of my Final Year Project [Person Indentifier]() that uses Deep Learning models to identify individuals based on their gait and actions. The API accepts person video and it's background videp as input and returns predictions for the class of the person captured in the video.
+This repository contains the code for an API of my Final Year Project [Person Indentifier](https://github.com/saad4zd/person-identifier-fyp) that uses Deep Learning models to identify individuals based on their gait and actions. The API accepts person video and it's background videp as input and returns predictions for the class of the person captured in the video.
 
 ## Overview
 
