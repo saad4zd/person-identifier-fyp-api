@@ -54,6 +54,9 @@ async def upload_file(files: List[UploadFile] = File(...)):
             else:
                 print("Error: Invalid frame size.")
                 break
+        
+        # Release the Video
+        capture_video.release()
 
     # silhouettes extraction
     gen_silhouettes()
