@@ -71,7 +71,7 @@ async def upload_file(files: List[UploadFile] = File(...)):
     # Prediction
     class_, confidence = predict()
 
-    # Delecting the folders
+    # Deleting the folders
     shutil.rmtree(os.path.join(os.getcwd(), temp_dir))
     shutil.rmtree(os.path.join(os.getcwd(), 'frames'))
     shutil.rmtree(os.path.join(os.getcwd(), 'bkgrd'))
