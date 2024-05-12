@@ -1,7 +1,5 @@
 fastapi
 uvicorn
-cv2
-os
-shutil
+opencv-python
 numpy
 tensorflow
