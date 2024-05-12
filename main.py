@@ -7,11 +7,20 @@ from prediction.predict import predict
 from fastapi import FastAPI, File, UploadFile
 from preprocessing.normalize import normalize
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from preprocessing.silhouettes import gen_silhouettes
 from fastapi.responses import HTMLResponse, JSONResponse
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -54,7 +63,7 @@ async def upload_file(files: List[UploadFile] = File(...)):
             else:
                 print("Error: Invalid frame size.")
                 break
-        
+
         # Release the Video
         capture_video.release()
 
