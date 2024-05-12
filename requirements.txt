@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+cv2
+os
+shutil
+numpy
+tensorflow
