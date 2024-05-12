@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-opencv-python
-opencv-contrib-python
+opencv-python==4.9.0.80
+opencv-contrib-python==4.9.0.80
 numpy
 tensorflow
