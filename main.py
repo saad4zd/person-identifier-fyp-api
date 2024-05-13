@@ -22,6 +22,9 @@ app.add_middleware(
     allow_headers=['*']
 )
 
+# Get the absolute path of the current directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
@@ -31,13 +34,20 @@ async def home():
 @app.post("/upload/")
 async def upload_file(files: List[UploadFile] = File(...)):
     # Making folders for Preprocessing Tasks
-    temp_dir = "temp"
+    temp_dir = os.path.join(BASE_DIR, "temp")
+    frames_dir = os.path.join(BASE_DIR, "frames")
+    bkgrd_dir = os.path.join(BASE_DIR, "bkgrd")
+    silhouettes_dir = os.path.join(BASE_DIR, "silhouettes")
+    normalize_dir = os.path.join(BASE_DIR, "normalize")
+    gei_dir = os.path.join(BASE_DIR, "gei")
+
     os.makedirs(temp_dir, exist_ok=True)
-    os.makedirs(os.path.join(os.getcwd(), 'frames'), exist_ok=True)
-    os.makedirs(os.path.join(os.getcwd(), 'bkgrd'), exist_ok=True)
-    os.makedirs(os.path.join(os.getcwd(), 'silhouettes'), exist_ok=True)
-    os.makedirs(os.path.join(os.getcwd(), 'normalize'), exist_ok=True)
-    os.makedirs(os.path.join(os.getcwd(), 'gei'), exist_ok=True)
+    os.makedirs(frames_dir, exist_ok=True)
+    os.makedirs(bkgrd_dir, exist_ok=True)
+    os.makedirs(silhouettes_dir, exist_ok=True)
+    os.makedirs(normalize_dir, exist_ok=True)
+    os.makedirs(gei_dir, exist_ok=True)
+
 
     for file in files:
         # Saving Video Files
@@ -81,12 +91,12 @@ async def upload_file(files: List[UploadFile] = File(...)):
     class_, confidence = predict()
 
     # Deleting the folders
-    shutil.rmtree(os.path.join(os.getcwd(), temp_dir))
-    shutil.rmtree(os.path.join(os.getcwd(), 'frames'))
-    shutil.rmtree(os.path.join(os.getcwd(), 'bkgrd'))
-    shutil.rmtree(os.path.join(os.getcwd(), 'silhouettes'))
-    shutil.rmtree(os.path.join(os.getcwd(), 'normalize'))
-    shutil.rmtree(os.path.join(os.getcwd(), 'gei'))
+    shutil.rmtree(temp_dir)
+    shutil.rmtree(frames_dir)
+    shutil.rmtree(bkgrd_dir)
+    shutil.rmtree(silhouettes_dir)
+    shutil.rmtree(normalize_dir)
+    shutil.rmtree(gei_dir)
 
     # Sending Response Back
     return JSONResponse(content={"prediction": f"Person Name: {class_} with {round(confidence*100,2)}% Confidence"}, status_code=200)

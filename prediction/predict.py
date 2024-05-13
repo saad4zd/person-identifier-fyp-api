@@ -19,10 +19,17 @@ def preprocess_image(image_path):
 
 
 def predict():
-    loaded_model = load_model(os.path.join(os.getcwd(
-    ), 'model/GaitNet.h5'), custom_objects={'top_5_accuracy': top_5_accuracy})
+    # Get the directory of the current script file
+    current_directory = os.path.dirname(os.path.abspath(__file__))
 
-    image_path = os.path.join(os.getcwd(), 'gei', 'gei.png')
+    # Adjust paths for deployment on a cloud platform
+    model_path = os.path.join(current_directory, '../model', 'GaitNet.h5')
+    image_path = os.path.join(current_directory, '../gei', 'gei.png')
+
+    # Load the model
+    loaded_model = load_model(model_path, custom_objects={'top_5_accuracy': top_5_accuracy})
+
+    # Preprocess the image
     preprocessed_image = preprocess_image(image_path)
     predictions = loaded_model.predict(preprocessed_image)
     predicted_class_index = np.argmax(predictions)

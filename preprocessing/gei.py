@@ -38,7 +38,13 @@ def gei_():
         for frame in nor_silhouettes
     ]
     nor_silh = [image_extract(frame, (128, 128)) for frame in nor_silh]
+
+    # Construct absolute path for saving GEI
+    gei_path = os.path.join(os.getcwd(), 'gei', 'gei.png')
+
+    # Calculate GEI
     gei = np.mean(nor_silh, axis=0).astype(np.uint8)
-    cv.imwrite(
-        f"{os.path.join(os.getcwd(),'gei')}/gei.png", gei)
+
+    # Save GEI
+    cv.imwrite(gei_path, gei)
     return True
