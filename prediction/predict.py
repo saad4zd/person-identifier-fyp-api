@@ -20,7 +20,7 @@ def preprocess_image(image_path):
 
 def predict():
     loaded_model = load_model(os.path.join(os.getcwd(
-    ), 'model/model.h5'), custom_objects={'top_5_accuracy': top_5_accuracy})
+    ), 'model/GaitNet.h5'), custom_objects={'top_5_accuracy': top_5_accuracy})
 
     image_path = os.path.join(os.getcwd(), 'gei', 'gei.png')
     preprocessed_image = preprocess_image(image_path)
